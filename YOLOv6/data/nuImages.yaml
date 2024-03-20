@@ -1,0 +1,24 @@
+# If you are using Windows system,
+# the dataset path should be like this:
+# train: d:\dataset\coco\images\train2017
+# because windows use "\" as separator, linux use "/" as separator.
+
+train: /home/jiachen/nuImages/datasets_mini/nuImages/images/train
+val: /home/jiachen/nuImages/datasets_mini/nuImages/images/val  # 5000 images
+test: /home/jiachen/nuImages/datasets_mini/nuImages/images/val
+anno_path: /home/jiachen/nuImages/datasets_mini/nuImages/annotations/instances_val.json
+
+# number of classes
+nc: 25
+# whether it is coco dataset, only coco dataset should be set to True.
+is_coco: False
+
+# class names
+names: [ 'animal', 'flat.driveable_surface', 'human.pedestrian.adult', 'human.pedestrian.child',
+                   'human.pedestrian.construction_worker', 'human.pedestrian.personal_mobility',
+                   'human.pedestrian.police_officer', 'human.pedestrian.stroller', 'human.pedestrian.wheelchair',
+                   'movable_object.barrier', 'movable_object.debris', 'movable_object.pushable_pullable',
+                   'movable_object.trafficcone', 'static_object.bicycle_rack', 'vehicle.bicycle', 'vehicle.bus.bendy',
+                   'vehicle.bus.rigid', 'vehicle.car', 'vehicle.construction', 'vehicle.ego',
+                   'vehicle.emergency.ambulance', 'vehicle.emergency.police', 'vehicle.motorcycle', 'vehicle.trailer',
+                   'vehicle.truck']

@@ -23,7 +23,12 @@ conda activate nuimages
 git clone https://github.com/LuckyMax0722/nuImages.git
 ```
 
-3. Install the nuImages development kit
+3. Install the pyTorch
+```
+conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+4. Install the nuImages development kit
 ```
 pip install nuscenes-devkit
 ```
@@ -31,9 +36,14 @@ pip install nuscenes-devkit
 For detail information, please refer to [nuImages
 /nuscenes_devkit](https://github.com/LuckyMax0722/nuImages/blob/51132df94d060667b071b24f462db95cc29c0294/nuscenes_devkit/README.md)
 
-4. Install the dependencies.
+5. Install MM development kit
 ```
-conda install pytorch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 pytorch-cuda=12.1 -c pytorch -c nvidia
+pip install -U openmim
+mim install mmengine
+mim install mmcv
+```
+6. Install the dependencies.
+```
 pip install easydict
 pip install notebook
 pip install tensorboard
@@ -41,6 +51,10 @@ pip install pandas
 pip install seaborn thop
 ```
 
+7. yolo2coco
+```
+pip install pylabel
+```
 ## Data Preparation
 
 ## Tasks
@@ -50,4 +64,10 @@ pip install seaborn thop
 ```
 cd ./nuImages/YOLOv5
 python3 train.py --img-size 640 --batch-size 6 --epochs 100 --data /home/jiachen/nuImages/YOLOv5/data/nuImages.yaml --cfg /home/jiachen/nuImages/YOLOv5/models/yolov5x_nuImages.yaml --weights weights/yolov5x.pt
+```
+
+#### YOLOv7
+```
+cd ./nuImages/YOLOv7
+python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/nuImages.yaml --img 640 640 --cfg ./cfg/training/yolov7x_nuImages.yaml --weights ./weights/yolov7x.pt --name yolov7x --hyp ./data/hyp.scratch.p5.yaml
 ```
