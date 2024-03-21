@@ -10,10 +10,18 @@ import torch
 import torch.distributed as dist
 import sys
 import datetime
-
+'''
 ROOT = os.getcwd()
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
+
+'''
+
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[1]  # YOLOv6 root directory
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 from yolov6.core.engine import Trainer
 from yolov6.utils.config import Config
@@ -21,7 +29,7 @@ from yolov6.utils.events import LOGGER, save_yaml
 from yolov6.utils.envs import get_envs, select_device, set_random_seed
 from yolov6.utils.general import increment_name, find_latest_checkpoint, check_img_size
 
-
+# python /home/jiachen/nuImages/YOLOv6/tools/train.py --data-path /home/jiachen/nuImages/YOLOv6/data/nuImages.yaml --batch-size 6 --conf-file /home/jiachen/nuImages/YOLOv6/configs/yolov6n.py --output-dir /home/jiachen/nuImages/YOLOv6/runs/train
 def get_args_parser(add_help=True):
     parser = argparse.ArgumentParser(description='YOLOv6 PyTorch Training', add_help=add_help)
     parser.add_argument('--data-path', default='./data/coco.yaml', type=str, help='path of dataset')
@@ -29,7 +37,7 @@ def get_args_parser(add_help=True):
     parser.add_argument('--img-size', default=640, type=int, help='train, val image size (pixels)')
     parser.add_argument('--rect', action='store_true', help='whether to use rectangular training, default is False')
     parser.add_argument('--batch-size', default=32, type=int, help='total batch size for all GPUs')
-    parser.add_argument('--epochs', default=400, type=int, help='number of total epochs to run')
+    parser.add_argument('--epochs', default=300, type=int, help='number of total epochs to run')
     parser.add_argument('--workers', default=8, type=int, help='number of data loading workers (default: 8)')
     parser.add_argument('--device', default='0', type=str, help='cuda device, i.e. 0 or 0,1,2,3 or cpu')
     parser.add_argument('--eval-interval', default=20, type=int, help='evaluate at every interval epochs')

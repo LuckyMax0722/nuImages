@@ -58,12 +58,31 @@ pip install pylabel
 ## Data Preparation
 
 ## Tasks
+Please use absolute path for the following command, for example, use ``/home/.../nuImages/YOLOv6/tools/train.py`` instead of ``<../tools/train.py>``.
 ### One-Stage Multi-Object Detection
 #### YOLOv5
 
 ```
 cd ./nuImages/YOLOv5
 python3 train.py --img-size 640 --batch-size 6 --epochs 100 --data /home/jiachen/nuImages/YOLOv5/data/nuImages.yaml --cfg /home/jiachen/nuImages/YOLOv5/models/yolov5x_nuImages.yaml --weights weights/yolov5x.pt
+```
+
+#### YOLOv6
+For detail information, please refer to [YOLOv6](https://github.com/meituan/YOLOv6)
+
+##### train
+```angular2html
+python <../tools/train.py> --data-path <../data/nuImages.yaml> --batch-size 6 --conf-file <../configs/yolov6n.py> --output-dir <../runs/train>
+```
+
+##### evaluate
+```angular2html
+python <../tools/eval.py> --data <../data/nuImages.yaml> --batch 6 --weights <../weights/yolov6l.pt> --task val --reproduce_640_eval --eval_config_file <../configs/experiment/eval_640_repro.py>
+```
+
+##### infer
+```angular2html
+python <../tools/infer.py> --yaml <../data/nuImages.yaml> --weights <../weights/yolov6l.pt> --save-dir <../runs/inference/exp> --source path_img/Video/...
 ```
 
 #### YOLOv7
