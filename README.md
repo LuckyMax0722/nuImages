@@ -80,7 +80,7 @@ python <../tools/train.py> --data-path <../data/nuImages.yaml> --batch-size 6 --
 python <../tools/eval.py> --data <../data/nuImages.yaml> --batch 6 --weights <../weights/yolov6l.pt> --task val --reproduce_640_eval --eval_config_file <../configs/experiment/eval_640_repro.py>
 ```
 
-##### infer
+##### inference
 ```angular2html
 python <../tools/infer.py> --yaml <../data/nuImages.yaml> --weights <../weights/yolov6l.pt> --save-dir <../runs/inference/exp> --source path_img/Video/...
 ```
@@ -89,4 +89,13 @@ python <../tools/infer.py> --yaml <../data/nuImages.yaml> --weights <../weights/
 ```
 cd ./nuImages/YOLOv7
 python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/nuImages.yaml --img 640 640 --cfg ./cfg/training/yolov7x_nuImages.yaml --weights ./weights/yolov7x.pt --name yolov7x --hyp ./data/hyp.scratch.p5.yaml
+```
+
+#### DETR
+For detail information, please refer to [DETR](https://github.com/facebookresearch/detr?tab=readme-ov-file)
+
+<p align="center"><img src="DETR/runs/inference/inference_image.png"/></p>
+##### inference
+```angular2html
+python <../inference.py> --resume <../weights/detr-r50-e632da11.pth> --source_dir path_img/... --output_dir <../runs/inference>
 ```
