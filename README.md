@@ -95,6 +95,12 @@ python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/
 For detail information, please refer to [DETR](https://github.com/facebookresearch/detr?tab=readme-ov-file)
 
 <p align="center"><img src="DETR/runs/inference/inference_image.png"/></p>
+
+##### train
+```angular2html
+python <../main.py> --dataset_file coco --coco_path <../nuImages> --batch_size 4 --output_dir <../runs/train>
+```
+
 ##### inference
 ```angular2html
 python <../inference.py> --resume <../weights/detr-r50-e632da11.pth> --source_dir path_img/... --output_dir <../runs/inference>

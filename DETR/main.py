@@ -16,7 +16,7 @@ from datasets import build_dataset, get_coco_api_from_dataset
 from engine import evaluate, train_one_epoch
 from models import build_model
 
-
+# python /home/jiachen/nuImages/DETR/main.py --dataset_file coco --coco_path /home/jiachen/nuImages/datasets_mini_coco/nuImages --batch_size 3 --output_dir /home/jiachen/nuImages/DETR/runs/train
 def get_args_parser():
     parser = argparse.ArgumentParser('Set transformer detector', add_help=False)
     parser.add_argument('--lr', default=1e-4, type=float)

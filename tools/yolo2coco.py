@@ -3,9 +3,7 @@ import logging
 logging.getLogger().setLevel(logging.CRITICAL)
 from pylabel import importer
 from lib.config import CONF
-from IPython.display import Image, display
-from PIL import Image
-import matplotlib.pyplot as plt
+import shutil
 import os
 
 def get_dataset(path_to_annotations, path_to_images):
@@ -31,30 +29,53 @@ def analyze_annotations(dataset):
     print(f"Class counts:\n{dataset.analyze.class_counts}")
 
 
+def copy_folder(source_folder, target_folder):
+    # 拷贝文件夹
+    try:
+        shutil.copytree(source_folder, target_folder)
+        print(f"文件夹从 {source_folder} 成功拷贝到 {target_folder}")
+    except shutil.Error as e:
+        print(f"文件夹拷贝失败: {e}")
+
+def delete_folder(folder_path):
+    folder_path = os.path.abspath(os.path.join(folder_path, os.pardir))
+    try:
+        shutil.rmtree(folder_path)
+        print(f"成功删除文件夹 {folder_path}")
+    except OSError as e:
+        print(f"删除文件夹 {folder_path} 失败: {e}")
+
 if __name__ == '__main__':
-    if not os.path.exists(CONF.datasets.annotations):
-        os.makedirs(CONF.datasets.annotations)
+    copy_folder(CONF.datasets.images_train, CONF.datasets.images_train_coco)
+    copy_folder(CONF.datasets.images_val, CONF.datasets.images_val_coco)
+    copy_folder(CONF.datasets.labels_train, CONF.datasets.labels_train_coco)
+    copy_folder(CONF.datasets.labels_val, CONF.datasets.labels_val_coco)
+
+    if not os.path.exists(CONF.datasets.annotations_coco):
+        os.makedirs(CONF.datasets.annotations_coco)
 
     # get training dataset json
-    path_to_images = CONF.datasets.images_train
-    path_to_annotations = CONF.datasets.labels_train
+    path_to_images = CONF.datasets.images_train_coco
+    path_to_annotations = CONF.datasets.labels_train_coco
     training_dataset = get_dataset(path_to_annotations, path_to_images)
 
     # Analyze Annotations
     # analyze_annotations(training_dataset)
 
-    out_path = os.path.join(CONF.datasets.annotations, 'instances_train.json')
+    out_path = os.path.join(CONF.datasets.annotations_coco, 'instances_train2017.json')
 
     training_dataset.export.ExportToCoco(output_path=out_path, cat_id_index=1)
 
     # get validate dataset json
-    path_to_images = CONF.datasets.images_val
-    path_to_annotations = CONF.datasets.labels_val
+    path_to_images = CONF.datasets.images_val_coco
+    path_to_annotations = CONF.datasets.labels_val_coco
     validate_dataset = get_dataset(path_to_annotations, path_to_images)
 
     # Analyze Annotations
     # analyze_annotations(validate_dataset)
 
-    out_path = os.path.join(CONF.datasets.annotations, 'instances_val.json')
+    out_path = os.path.join(CONF.datasets.annotations_coco, 'instances_val2017.json')
 
-    training_dataset.export.ExportToCoco(output_path=out_path, cat_id_index=1)
+    validate_dataset.export.ExportToCoco(output_path=out_path, cat_id_index=1)
+
+    delete_folder(CONF.datasets.labels_train_coco)

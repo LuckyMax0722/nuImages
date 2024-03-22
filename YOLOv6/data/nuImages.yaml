@@ -6,7 +6,7 @@
 train: /home/jiachen/nuImages/datasets_mini/nuImages/images/train
 val: /home/jiachen/nuImages/datasets_mini/nuImages/images/val  # 5000 images
 test: /home/jiachen/nuImages/datasets_mini/nuImages/images/val
-anno_path: /home/jiachen/nuImages/datasets_mini/nuImages/annotations/instances_val.json
+anno_path: /home/jiachen/nuImages/datasets_mini/nuImages/annotations/instances_val2017.json
 
 # number of classes
 nc: 25

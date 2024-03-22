@@ -8,6 +8,9 @@ import matplotlib.pyplot as plt
 import torchvision.transforms as T
 from PIL import Image
 
+
+# python /home/jiachen/nuImages/DETR/inference.py --resume /home/jiachen/nuImages/DETR/runs/train/checkpoint0299.pth --source_dir /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg --output_dir /home/jiachen/nuImages/DETR/runs/inference
+#
 def get_args_parser():
     parser = argparse.ArgumentParser('Set transformer detector', add_help=False)
     parser.add_argument('--lr', default=1e-4, type=float)
@@ -128,7 +131,7 @@ def plot_results(pil_img, prob, boxes):
         'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier',
         'toothbrush']
 
-    plt.figure(figsize=(30, 8))
+    plt.figure(figsize=(45, 8))
 
     # 绘制原图
     plt.subplot(1, 2, 1)
@@ -186,7 +189,6 @@ def main(args):
     bboxes_scaled = rescale_bboxes(outputs['pred_boxes'][0, keep], image.size)
     plot_results(image, probas[keep], bboxes_scaled)
 
-    # python /home/jiachen/nuImages/DETR/inference.py --resume /home/jiachen/nuImages/DETR/weights/detr-r50-e632da11.pth --source_dir /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg --output_dir /home/jiachen/nuImages/DETR/runs/inference
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('DETR training and evaluation script', parents=[get_args_parser()])
