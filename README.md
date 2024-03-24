@@ -66,7 +66,7 @@ Please use absolute path for the following command, for example, use ``/home/Max
 #### YOLOv5
 For detail information, please refer to [YOLOv5](https://github.com/ultralytics/yolov5)
 
-<p align="center"><img src="/home/jiachen/nuImages/YOLOv5/runs/detect/exp/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg"/></p>
+<p align="center"><img src="YOLOv5/runs/detect/exp/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg"/></p>
 
 ##### train
 ```angular2html
