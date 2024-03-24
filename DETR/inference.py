@@ -7,7 +7,7 @@ from models import build_model
 import matplotlib.pyplot as plt
 import torchvision.transforms as T
 from PIL import Image
-
+import cv2
 
 # python /home/jiachen/nuImages/DETR/inference.py --resume /home/jiachen/nuImages/DETR/weights/detr-r101-dc5-a2e86def.pth --source_dir /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg --output_dir /home/jiachen/nuImages/DETR/runs/inference
 #
@@ -105,7 +105,8 @@ def get_args_parser():
 # for output bounding box post-processing
 def box_cxcywh_to_xyxy(x):
     x_c, y_c, w, h = x.unbind(1)
-    b = [(x_c - 0.5 * w), (y_c - 0.5 * h), w, h]
+    b = [(x_c - 0.5 * w), (y_c - 0.5 * h),
+         w, h]
     return torch.stack(b, dim=1)
 
 def rescale_bboxes(out_bbox, size):
@@ -149,8 +150,9 @@ def plot_results(pil_img, prob, boxes):
     ax.axis('off')
 
     out_path = os.path.join(args.output_dir, 'inference_image.png')
-    plt.savefig(out_path)
+    plt.savefig(out_path, bbox_inches='tight', pad_inches=0.0, dpi=300)
     plt.show()
+
 
 
 def main(args):
