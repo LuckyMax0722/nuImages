@@ -37,6 +37,9 @@ from pathlib import Path
 
 import torch
 
+# python /home/jiachen/nuImages/YOLOv5/detect.py --weights /home/jiachen/nuImages/YOLOv5/weights/yolov5x.pt --data /home/jiachen/nuImages/YOLOv5/data/nuImages_inference.yaml --source /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg
+
+
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]  # YOLOv5 root directory
 if str(ROOT) not in sys.path:

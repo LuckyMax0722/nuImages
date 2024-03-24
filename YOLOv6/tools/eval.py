@@ -22,7 +22,7 @@ from yolov6.utils.events import LOGGER
 from yolov6.utils.general import increment_name, check_img_size
 from yolov6.utils.config import Config
 
-# python /home/jiachen/nuImages/YOLOv6/tools/eval.py --data /home/jiachen/nuImages/YOLOv6/data/nuImages.yaml --batch 4 --weights /home/jiachen/nuImages/YOLOv6/weights/yolov6l.pt --task val --reproduce_640_eval --eval_config_file /home/jiachen/nuImages/YOLOv6/configs/experiment/eval_640_repro.py
+# python /home/jiachen/nuImages/YOLOv6/tools/eval.py --data /home/jiachen/nuImages/YOLOv6/data/nuImages_train.yaml --batch 4 --weights /home/jiachen/nuImages/YOLOv6/weights/yolov6l.pt --task val --reproduce_640_eval --eval_config_file /home/jiachen/nuImages/YOLOv6/configs/experiment/eval_640_repro.py
 def boolean_string(s):
     if s not in {'False', 'True'}:
         raise ValueError('Not a valid boolean string')

@@ -37,7 +37,7 @@ from utils.wandb_logging.wandb_utils import WandbLogger, check_wandb_resume
 
 logger = logging.getLogger(__name__)
 
-# python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/nuImages.yaml --img 640 640 --cfg ./cfg/training/yolov7x_nuImages.yaml --weights ./weights/yolov7x.pt --name yolov7x --hyp ./data/hyp.scratch.p5.yaml
+# python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/nuImages_train.yaml --img 640 640 --cfg ./cfg/training/yolov7x_nuImages.yaml --weights ./weights/yolov7x.pt --name yolov7x --hyp ./data/hyp.scratch.p5.yaml
 
 def train(hyp, opt, device, tb_writer=None):
     logger.info(colorstr('hyperparameters: ') + ', '.join(f'{k}={v}' for k, v in hyp.items()))

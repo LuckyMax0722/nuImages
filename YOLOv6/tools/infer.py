@@ -24,7 +24,7 @@ from yolov6.core.inferer import Inferer
 
 
 
-# python /home/jiachen/nuImages/YOLOv6/tools/infer.py --yaml /home/jiachen/nuImages/YOLOv6/data/nuImages.yaml --weights /home/jiachen/nuImages/YOLOv6/runs/train/exp2/weights/best_ckpt.pt --save-dir /home/jiachen/nuImages/YOLOv6/runs/inference/exp --source /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT_LEFT/n003-2018-01-02-11-48-43+0800__CAM_FRONT_LEFT__1514865026557615.jpg
+# python /home/jiachen/nuImages/YOLOv6/tools/infer.py --yaml /home/jiachen/nuImages/YOLOv6/data/nuImages_inference.yaml --weights /home/jiachen/nuImages/YOLOv6/weights/yolov6l.pt --save-dir /home/jiachen/nuImages/YOLOv6/runs/inference/exp --source /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg
 def get_args_parser(add_help=True):
     parser = argparse.ArgumentParser(description='YOLOv6 PyTorch Inference.', add_help=add_help)
     parser.add_argument('--weights', type=str, default='weights/yolov6s.pt', help='model path(s) for inference.')

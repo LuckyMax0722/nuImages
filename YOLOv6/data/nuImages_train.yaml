@@ -3,11 +3,12 @@
 # train: d:\dataset\coco\images\train2017
 # because windows use "\" as separator, linux use "/" as separator.
 
-train: /home/jiachen/nuImages/datasets_mini/nuImages/images/train
-val: /home/jiachen/nuImages/datasets_mini/nuImages/images/val  # 5000 images
-test: /home/jiachen/nuImages/datasets_mini/nuImages/images/val
-anno_path: /home/jiachen/nuImages/datasets_mini/nuImages/annotations/instances_val2017.json
+train: /home/jiachen/nuImages/datasets_mini_yolov6/nuImages/images/train2017
+val: /home/jiachen/nuImages/datasets_mini_yolov6/nuImages/images/val2017
+test: /home/jiachen/nuImages/datasets_mini_yolov6/nuImages/images/test2017
+anno_path: /home/jiachen/nuImages/datasets_mini_yolov6/nuImages/annotations/instances_val2017.json
 
+# training
 # number of classes
 nc: 25
 # whether it is coco dataset, only coco dataset should be set to True.
@@ -22,3 +23,4 @@ names: [ 'animal', 'flat.driveable_surface', 'human.pedestrian.adult', 'human.pe
                    'vehicle.bus.rigid', 'vehicle.car', 'vehicle.construction', 'vehicle.ego',
                    'vehicle.emergency.ambulance', 'vehicle.emergency.police', 'vehicle.motorcycle', 'vehicle.trailer',
                    'vehicle.truck']
+

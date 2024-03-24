@@ -14,7 +14,7 @@ Datasets:   https://github.com/ultralytics/yolov5/tree/master/data
 Tutorial:   https://docs.ultralytics.com/yolov5/tutorials/train_custom_data
 """
 
-# python3 train.py --img-size 640 --batch-size 6 --epochs 100 --data /home/jiachen/nuImages/YOLOv5/data/nuImages.yaml --cfg /home/jiachen/nuImages/YOLOv5/models/yolov5x_nuImages.yaml --weights weights/yolov5x.pt
+# python3 train.py --img-size 640 --batch-size 6 --epochs 300 --data /home/jiachen/nuImages/YOLOv5/data/nuImages_train.yaml --cfg /home/jiachen/nuImages/YOLOv5/models/yolov5x_nuImages.yaml --weights weights/yolov5x.pt
 
 import argparse
 import math

@@ -9,7 +9,7 @@ import torchvision.transforms as T
 from PIL import Image
 
 
-# python /home/jiachen/nuImages/DETR/inference.py --resume /home/jiachen/nuImages/DETR/runs/train/checkpoint0299.pth --source_dir /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg --output_dir /home/jiachen/nuImages/DETR/runs/inference
+# python /home/jiachen/nuImages/DETR/inference.py --resume /home/jiachen/nuImages/DETR/weights/detr-r101-dc5-a2e86def.pth --source_dir /home/jiachen/nuImages/data/nuimages/samples/CAM_FRONT/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg --output_dir /home/jiachen/nuImages/DETR/runs/inference
 #
 def get_args_parser():
     parser = argparse.ArgumentParser('Set transformer detector', add_help=False)
@@ -26,7 +26,8 @@ def get_args_parser():
     parser.add_argument('--frozen_weights', type=str, default=None,
                         help="Path to the pretrained model. If set, only the mask head will be trained")
     # * Backbone
-    parser.add_argument('--backbone', default='resnet50', type=str,
+    # 注意这里所使用的backbone必须和pre-trained 模型对齐
+    parser.add_argument('--backbone', default='resnet101', type=str,
                         help="Name of the convolutional backbone to use")
     parser.add_argument('--dilation', action='store_true',
                         help="If true, we replace stride with dilation in the last convolutional block (DC5)")
@@ -104,8 +105,7 @@ def get_args_parser():
 # for output bounding box post-processing
 def box_cxcywh_to_xyxy(x):
     x_c, y_c, w, h = x.unbind(1)
-    b = [(x_c - 0.5 * w), (y_c - 0.5 * h),
-         (x_c + 0.5 * w), (y_c + 0.5 * h)]
+    b = [(x_c - 0.5 * w), (y_c - 0.5 * h), w, h]
     return torch.stack(b, dim=1)
 
 def rescale_bboxes(out_bbox, size):
@@ -131,21 +131,16 @@ def plot_results(pil_img, prob, boxes):
         'book', 'clock', 'vase', 'scissors', 'teddy bear', 'hair drier',
         'toothbrush']
 
-    plt.figure(figsize=(45, 8))
-
-    # 绘制原图
-    plt.subplot(1, 2, 1)
-    plt.imshow(pil_img)
-    plt.title('Original Image')
-    plt.axis('off')
+    plt.figure()
 
     # 绘制带有边界框的图像
-    plt.subplot(1, 2, 2)
     plt.imshow(pil_img)
     ax = plt.gca()
     colors = ['r', 'g', 'b', 'y']  # 定义边界框颜色
-    for p, (xmin, ymin, xmax, ymax), c in zip(prob, boxes.tolist(), colors):
-        ax.add_patch(plt.Rectangle((xmin, ymin), xmax - xmin, ymax - ymin,
+
+    for i, (p, (xmin, ymin, w, h)) in enumerate(zip(prob, boxes.tolist())):
+        c = colors[i % len(colors)]  # 选择颜色，确保超出预定义颜色数量限制时循环使用
+        ax.add_patch(plt.Rectangle((xmin, ymin), w, h,
                                    fill=False, color=c, linewidth=3))
         cl = p.argmax()
         text = f'{CLASSES[cl]}: {p[cl]:0.2f}'
@@ -170,9 +165,8 @@ def main(args):
     image = Image.open(args.source_dir)
 
     transform = T.Compose([
-        T.Resize(800),
-        T.ToTensor(),
-        T.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        T.Resize([1300]),
+        T.ToTensor()
     ])
 
     image_tensor = transform(image).unsqueeze(0)
@@ -182,13 +176,12 @@ def main(args):
 
     # keep only predictions with 0.7+ confidence
     probas = outputs['pred_logits'].softmax(-1)[0, :, :-1]
-    print(probas.size())
-    keep = probas.max(-1).values > 0.9
-    print(keep)
+    keep = probas.max(-1).values > 0.85
+
+    print(image.size)
     # convert boxes from [0; 1] to image scales
     bboxes_scaled = rescale_bboxes(outputs['pred_boxes'][0, keep], image.size)
     plot_results(image, probas[keep], bboxes_scaled)
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser('DETR training and evaluation script', parents=[get_args_parser()])

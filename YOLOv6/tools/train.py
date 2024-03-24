@@ -29,7 +29,7 @@ from yolov6.utils.events import LOGGER, save_yaml
 from yolov6.utils.envs import get_envs, select_device, set_random_seed
 from yolov6.utils.general import increment_name, find_latest_checkpoint, check_img_size
 
-# python /home/jiachen/nuImages/YOLOv6/tools/train.py --data-path /home/jiachen/nuImages/YOLOv6/data/nuImages.yaml --batch-size 6 --conf-file /home/jiachen/nuImages/YOLOv6/configs/yolov6n.py --output-dir /home/jiachen/nuImages/YOLOv6/runs/train
+# python /home/jiachen/nuImages/YOLOv6/tools/train.py --data-path /home/jiachen/nuImages/YOLOv6/data/nuImages_train.yaml --batch-size 6 --conf-file /home/jiachen/nuImages/YOLOv6/configs/yolov6n.py --output-dir /home/jiachen/nuImages/YOLOv6/runs/train
 def get_args_parser(add_help=True):
     parser = argparse.ArgumentParser(description='YOLOv6 PyTorch Training', add_help=add_help)
     parser.add_argument('--data-path', default='./data/coco.yaml', type=str, help='path of dataset')
