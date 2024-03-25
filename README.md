@@ -59,6 +59,109 @@ pip install pylabel
 ```
 
 ## Data Preparation
+1. First, you need to register/login on nuScenes to download the [nuImages dataset](https://www.nuscenes.org/nuimages).
+There are two nuImages datasets available on the nuScenes website, that is, **Mini** and **All**. you can choose to download either of them, but this work only develops the **Mini-based** data processing method. Your folder should look like this:
+```
+data
+├── nuimages
+│   ├── samples
+│       ├── CAM_BACK     
+│       ├── .......
+│   ├── v1.0-mini
+│       ├── ......
+│   ├── v1.0-train (optional)
+│       ├── ......
+│   ├── ......
+```
+
+2. Before processing the data, please set the base path of the project in ``lib/config.py``.
+```angular2html
+# Main Path
+...
+CONF.PATH.BASE = '.../nuImages'  # TODO: change this
+```
+
+3. First you need to use a data converter to convert the nuImages dataset into a YOLO format dataset. Please note that this step is **mandatory** whether you want to use YOLO or not. This YOLO format dataset is available for YOLOv5-v9 (except v6).
+```angular2html
+python tools/nuImages2yolo.py
+```
+Your folder should look like this:
+```
+datasets_mini
+├── nuImages
+│   ├── images
+│       ├── train     
+│           ├── n003...8469.jpg
+│           ├── ...
+│       ├── val
+│           ├── n013...5896.jpg
+│           ├── ...
+│   ├── labels
+│       ├── train     
+│           ├── n003...8469.txt
+│           ├── ...
+│       ├── val
+│           ├── n013...5896.txt
+│           ├── ...
+```
+
+4. If you want to use YOLOv6 for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
+```angular2html
+# Model
+CONF.model = EasyDict()
+CONF.model.version = 'YOLOv6' # ['YOLOv6', 'DETR'] # TODO: change this
+```
+Then use the data conversion tool.
+```angular2html
+python tools/nuImages2yolo6.py
+```
+Your folder should look like this:
+```
+datasets_mini_yolov6
+├── nuImages
+│   ├── annotations
+│       ├── instance_train2017.json
+│       ├── instance_val2017.json
+│   ├── images
+│       ├── train2017    
+│           ├── n003...8469.jpg
+│           ├── ...
+│       ├── val2017
+│           ├── n013...5896.jpg
+│           ├── ...
+│   ├── labels
+│       ├── train2017   
+│           ├── n003...8469.txt
+│           ├── ...
+│       ├── val2017
+│           ├── n013...5896.txt
+│           ├── ...
+```
+
+5. If you want to use DETR for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
+```angular2html
+# Model
+CONF.model = EasyDict()
+CONF.model.version = 'DETR' # ['YOLOv6', 'DETR'] # TODO: change this
+```
+Then use the data conversion tool.
+```angular2html
+python tools/yolo2coco.py
+```
+Your folder should look like this:
+```
+datasets_mini_coco
+├── nuImages
+│   ├── annotations
+│       ├── instance_train2017.json
+│       ├── instance_val2017.json
+│   ├── train2017    
+│       ├── n003...8469.jpg
+│       ├── ...
+│   ├── val2017
+│       ├── n013...5896.jpg
+│       ├── ...
+```
 
 ## Tasks
 Please use absolute path for the following command, for example, use ``/home/Max/nuImages/YOLOv6/tools/train.py`` instead of ``<../tools/train.py>``.
@@ -99,9 +202,17 @@ python <../tools/infer.py> --yaml <../data/nuImages_inference.yaml> --weights <.
 ```
 
 #### YOLOv7
+For detail information, please refer to [YOLOv7](https://github.com/WongKinYiu/yolov7)
+
+<p align="center"><img src="YOLOv7/runs/inference/exp/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg"/></p>
+
+```angular2html
+python <../train.py> --workers 8 --device 0 --epochs 300 --batch-size 6 --data ./data/nuImages_train.yaml --img 640 640 --cfg <../cfg/training/yolov7x_nuImages.yaml> --weights <../weights/yolov7x.pt> --name yolov7x --hyp <../data/hyp.scratch.p5.yaml>
 ```
-cd ./nuImages/YOLOv7
-python train.py --workers 8 --device 0 --epochs 30 --batch-size 6 --data ./data/nuImages.yaml --img 640 640 --cfg ./cfg/training/yolov7x_nuImages.yaml --weights ./weights/yolov7x.pt --name yolov7x --hyp ./data/hyp.scratch.p5.yaml
+
+##### inference
+```angular2html
+python <../detect.py> --weights <../yolov7x.pt> --iou-thres 0.9 --img-size 640 --source path_img/Video/... --project <../runs/inference>
 ```
 
 ### Transformer-based Multi-Object Detection

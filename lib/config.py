@@ -13,11 +13,11 @@ CONF.PATH.DATASETS_MINI_COCO = os.path.join(CONF.PATH.BASE, 'datasets_mini_coco'
 CONF.PATH.DATASETS_MINI_YOLOV6 = os.path.join(CONF.PATH.BASE, 'datasets_mini_yolov6')
 # Data
 CONF.data = EasyDict()
-CONF.data.version = 'v1.0-mini' # ['v1.0-mini', 'v1.0']
+CONF.data.version = 'v1.0-mini' # ['v1.0-mini']
 
 # Model
 CONF.model = EasyDict()
-CONF.model.version = 'YOLOv6' # ['YOLOv6', 'DETR']
+CONF.model.version = 'YOLOv6' # ['YOLOv6', 'DETR'] # TODO: change this
 
 # Datasets
 CONF.datasets = EasyDict()
@@ -40,8 +40,8 @@ if CONF.data.version == 'v1.0-mini':
         # YOLOv6
         CONF.datasets.images_train_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/images/train2017')
         CONF.datasets.images_val_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/images/val2017')
-        CONF.datasets.labels_train_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/labels/train')
-        CONF.datasets.labels_val_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/labels/val')
+        CONF.datasets.labels_train_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/labels/train2017')
+        CONF.datasets.labels_val_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/labels/val2017')
         CONF.datasets.annotations_coco = os.path.join(CONF.PATH.DATASETS_MINI_YOLOV6, 'nuImages/annotations')
 
 elif CONF.data.version == 'v1.0':
