@@ -215,6 +215,20 @@ python <../train.py> --workers 8 --device 0 --epochs 300 --batch-size 6 --data .
 python <../detect.py> --weights <../yolov7x.pt> --iou-thres 0.9 --img-size 640 --source path_img/Video/... --project <../runs/inference>
 ```
 
+#### YOLOv8
+For detail information, please refer to [YOLOv8](https://github.com/ultralytics/ultralytics)
+
+<p align="center"><img src="YOLOv8/runs/detect/inference/result.jpg"/></p>
+
+```angular2html
+python <../train.py>
+```
+
+##### inference
+```angular2html
+python <../infer.py>
+```
+
 ### Transformer-based Multi-Object Detection
 #### DETR
 For detail information, please refer to [DETR](https://github.com/facebookresearch/detr?tab=readme-ov-file)
