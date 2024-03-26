@@ -1,1 +1,1 @@
-*.ipynb linguist-vendored=True
+nuscenes_devkit/python-sdk/tutorials/** linguist-vendored
