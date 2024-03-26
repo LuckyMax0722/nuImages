@@ -168,7 +168,7 @@ datasets_mini_coco
 │       ├── ...
 ```
 
-## Tasks
+## Object Detection
 Please use absolute path for the following command, for example, use ``/home/Max/nuImages/YOLOv6/tools/train.py`` instead of ``<../tools/train.py>``.
 ### One-Stage Multi-Object Detection
 #### YOLOv5
