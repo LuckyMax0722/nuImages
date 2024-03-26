@@ -105,7 +105,11 @@ datasets_mini
 │           ├── ...
 ```
 
-4. If you want to use YOLOv6 for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
+## Data Augmentation
+
+## Data Conversion
+### YOLOv6
+If you want to use YOLOv6 for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
 ```angular2html
 # Model
 CONF.model = EasyDict()
@@ -138,7 +142,8 @@ datasets_mini_yolov6
 │           ├── ...
 ```
 
-5. If you want to use DETR for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
+### COCO
+If you want to use DETR for training and inference on the nuImages dataset, first set the model version in ``lib/config.py``.
 ```angular2html
 # Model
 CONF.model = EasyDict()
@@ -228,6 +233,21 @@ python <../train.py>
 ```angular2html
 python <../infer.py>
 ```
+
+#### YOLOv9
+For detail information, please refer to [YOLOv9](https://github.com/WongKinYiu/yolov9)
+
+<p align="center"><img src="YOLOv9/runs/detect/exp/n003-2018-01-02-11-48-43+0800__CAM_FRONT__1514865067391098.jpg"/></p>
+
+```angular2html
+python <../train_dual.py> --workers 8 --device 0 --batch 4 --data <../data/nuimages.yaml> --img 640 --cfg <../models/detect/yolov9-e.yaml> --name yolov9-e --hyp hyp.scratch-high.yaml --min-items 0 --epochs 300 --close-mosaic 15
+```
+
+##### inference
+```angular2html
+python <../detect.py> --source path_img/Video/... --img 640 --device 0 --weights <../weights/yolov9-e-converted.pt>
+```
+
 
 ### Transformer-based Multi-Object Detection
 #### DETR
