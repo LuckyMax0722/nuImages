@@ -25,6 +25,23 @@ def get_obj_data(label_file):
     return obj_data
 
 
+def save_plot_with_incremental_name(figure, output_folder=CONF.PATH.DEMO):
+    # 确保输出文件夹存在
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    # 获取输出文件夹中现有的文件数量
+    existing_files = os.listdir(output_folder)
+    num_existing_files = len(existing_files)
+
+    # 设置下一个文件的名称
+    next_filename = f"demo_{num_existing_files + 1}.png"
+
+    # 保存图形为文件
+    output_path = os.path.join(output_folder, next_filename)
+    figure.savefig(output_path)
+
+
 def visualize(file_path, normalized_obj_bbox):
     # 读取图片
     img = mpimg.imread(file_path)
@@ -53,6 +70,7 @@ def visualize(file_path, normalized_obj_bbox):
         ax.add_patch(rect)
 
     # 显示
+    save_plot_with_incremental_name(plt)
     plt.show()
 
 

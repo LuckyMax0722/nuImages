@@ -106,6 +106,15 @@ datasets_mini
 ```
 
 ## Data Augmentation
+In addition to data augmentation in YOLO, this project provides additional ways to augment data.
+```angular2html
+python <../tools/augmentation.py>
+```
+### Horizontal Flip
+<div style="display:inline-block">
+  <img src="demo/demo_1.png" alt="image1" width="410">
+  <img src="demo/demo_2.png" alt="image2" width="410">
+</div>
 
 ## Data Conversion
 ### YOLOv6

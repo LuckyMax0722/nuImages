@@ -11,6 +11,7 @@ CONF.PATH.DATASETS = os.path.join(CONF.PATH.BASE, 'datasets')
 CONF.PATH.DATASETS_MINI = os.path.join(CONF.PATH.BASE, 'datasets_mini')
 CONF.PATH.DATASETS_MINI_COCO = os.path.join(CONF.PATH.BASE, 'datasets_mini_coco')
 CONF.PATH.DATASETS_MINI_YOLOV6 = os.path.join(CONF.PATH.BASE, 'datasets_mini_yolov6')
+CONF.PATH.DEMO = os.path.join(CONF.PATH.BASE, 'demo')
 # Data
 CONF.data = EasyDict()
 CONF.data.version = 'v1.0-mini' # ['v1.0-mini']
